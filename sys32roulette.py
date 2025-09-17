@@ -6,6 +6,7 @@ system32_path = "C:\\Windows\\System32"
 
 def main():
     print("Welcome to windows system32 roulette!")
+    print("NOTE: anything caused by running this program is not the fault of the creator, as the runner has multiple chances to opt out, has downloaded and run the file by choice, and knows what it does.")
     if input("WARNING!!! \n Are you sure you want to play? This may delete important system files. (y/n): ").lower() != 'y':
         print("Exiting...")
         sys.exit()
@@ -36,5 +37,6 @@ def main():
 
 if True:
     main()
+
 
 
