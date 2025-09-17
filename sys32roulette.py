@@ -2,8 +2,6 @@ import os
 import sys
 import random
 import ctypes
-import subprocess
-
 
 system32_path = "C:\\Windows\\System32"
 
