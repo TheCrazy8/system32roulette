@@ -17,16 +17,24 @@ def main():
         else:
             pass
     print("Starting the game...")
-    files = os.listdir(system32_path)
+    # Only select regular files
+    files = [f for f in os.listdir(system32_path) if os.path.isfile(os.path.join(system32_path, f))]
+    if not files:
+        print("No regular files found in System32 directory.")
+        sys.exit()
     random_file = random.choice(files)
+    full_path = os.path.join(system32_path, random_file)
     print(f"Your random system32 file is: {random_file}")
-    print(f"Full path: {os.path.join(system32_path, random_file)}")
+    print(f"Full path: {full_path}")
     print(f"We will now get a random number between 1 and 6.  If you get a 1, we will delete this file.")
     random_number = random.randint(1, 6)
     print(f"You rolled a {random_number}.")
     if random_number == 1:
-        os.remove(os.path.join(system32_path, random_file))
-        print(f"{random_file} has been deleted.")
+        try:
+            os.remove(full_path)
+            print(f"{random_file} has been deleted.")
+        except Exception as e:
+            print(f"Failed to delete {random_file}: {e}")
     else:
         print(f"{random_file} has not been deleted.")
     if input("Do you want to play again? (y/n): ").lower() == 'y':
